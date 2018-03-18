@@ -7,7 +7,7 @@
     <RepositoryUrl>https://github.com/piccaso/csvhelper-fluent.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://github.com/piccaso/csvhelper-fluent/blob/master/license.txt</PackageLicenseUrl>
-    <Description></Description>
+    <Description>CsvHelper Extensions to quickly read and write Excel-Compatible csv Files</Description>
 
     <DefineConstants Condition="'$(TargetFramework)' == 'netstandard2.0'">NETSTD20</DefineConstants>
     <DefineConstants Condition="'$(TargetFramework)' == 'net45'">NET45</DefineConstants>
