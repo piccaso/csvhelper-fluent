@@ -9,7 +9,8 @@ namespace CsvHelper.Fluent
 {
     public static class Extensions
     {
-        public static IList<T> ReadCsv<T>(FileInfo file, CsvCfg config = null)
+        public static IList<T> ReadCsv<T>(this CsvCfg config, FileInfo file) => ReadCsv<T>(file, config);
+        public static IList<T> ReadCsv<T>(this FileInfo file, CsvCfg config = null)
         {
             config = config ?? Configuration.Default;
             using (var fs = File.OpenRead(file.FullName))
@@ -20,7 +21,7 @@ namespace CsvHelper.Fluent
             }
         }
 
-        public static IList<T> ReadCsv<T>(FileInfo file, Func<IReaderRow, T> readFunc) => ReadCsv(null, file, readFunc);
+        public static IList<T> ReadCsv<T>(this FileInfo file, Func<IReaderRow, T> readFunc) => ReadCsv(null, file, readFunc);
         public static IList<T> ReadCsv<T>(this CsvCfg config, FileInfo file, Func<IReaderRow,T> readFunc)
         {
             config = config ?? Configuration.Default;
@@ -44,8 +45,8 @@ namespace CsvHelper.Fluent
             }
         }
 
-        public static void WriteCsvTo(this CsvCfg config, IEnum data, Stream stream) => WriteCsvTo(data, stream, config);
-        public static void WriteCsvTo(this IEnum data, Stream stream, CsvCfg config = null)
+        public static void WriteCsv(this CsvCfg config, IEnum data, Stream stream) => WriteCsv(data, stream, config);
+        public static void WriteCsv(this IEnum data, Stream stream, CsvCfg config = null)
         {
             config = config ?? Configuration.Default;
             using (var sw = new StreamWriter(stream, config.Encoding))
@@ -54,19 +55,20 @@ namespace CsvHelper.Fluent
                 csvWriter.WriteRecords(data);
             }
         }
+        public static void WriteCsv(this FileInfo file, IEnum data, CsvCfg config = null) => WriteCsv(data, file, config);
         public static void WriteCsv(this CsvCfg config, IEnum data, FileInfo file) => WriteCsv(data, file, config);
         public static void WriteCsv(this IEnum data, FileInfo file, CsvCfg config = null)
         {
             using (var fs = File.OpenWrite(file.FullName))
             {
-                data.WriteCsvTo(fs, config);
+                data.WriteCsv(fs, config);
             }
         }
         public static byte[] GetCsvBytes(this IEnum data, CsvCfg config = null)
         {
             using (var ms = new MemoryStream())
             {
-                data.WriteCsvTo(ms, config);
+                data.WriteCsv(ms, config);
                 return ms.ToArray();
             }
         }
