@@ -42,6 +42,12 @@ namespace CsvHelper.Fluent.Tests
             Assert.Equal(data[0].col1, csv[0].col1);
             Assert.Equal(data[1].col2, csv[1].col2);
             Assert.Equal(data[2].col3, csv[2].col3);
+
+            var dynCsv = file.ReadCsv<dynamic>();
+            Assert.Equal(data[0].col1.ToString(), dynCsv[0].col1.ToString());
+            Assert.Equal(data[1].col2.ToString(), dynCsv[1].col2.ToString());
+            Assert.Equal(data[2].col3.ToString(), dynCsv[2].col3.ToString());
+
         }
 
         public class Product
