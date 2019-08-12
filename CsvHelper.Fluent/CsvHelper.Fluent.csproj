@@ -29,7 +29,7 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="7.1.0" allowedVersions="7.0.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.4.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="2.1.23" PrivateAssets="all" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.0.25" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
